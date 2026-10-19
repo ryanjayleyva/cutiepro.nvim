@@ -4,8 +4,6 @@ A dark pastel colorscheme for Neovim, ported from CutiePro 🩷
 
 Warm pinks, muted olive greens, lilac functions, and soft neutral backgrounds, bringing the CutiePro aesthetic to your Neovim setup.
 
-> This is an independent, community-made port of CutiePro. It is not affiliated with or maintained by the CutiePro organization.
-
 ## Features
 
 - Carefully ported CutiePro color palette
