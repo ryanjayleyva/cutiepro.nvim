@@ -26,6 +26,21 @@ Warm pinks, muted olive greens, lilac functions, and soft neutral backgrounds, b
 
 ## Installation
 
+### vim.pack
+
+Neovim 0.12 ships a built-in plugin manager, `vim.pack`. Add the following to your `init.lua`:
+
+```lua
+vim.pack.add({
+  { src = "https://github.com/ryanjayleyva/cutiepro.nvim" },
+})
+
+require("cutiepro").setup()
+vim.cmd.colorscheme("cutiepro")
+```
+
+`vim.pack` requires Neovim 0.12 or newer.
+
 ### lazy.nvim
 
 Add the following to your plugin specifications:
