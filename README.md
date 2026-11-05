@@ -4,6 +4,8 @@ A dark pastel colorscheme for Neovim, ported from CutiePro 🩷
 
 Warm pinks, muted olive greens, lilac functions, and soft neutral backgrounds, bringing the CutiePro aesthetic to your Neovim setup.
 
+![cutiepro.nvim preview](assets/cutiepro.webp)
+
 ## Features
 
 - Carefully ported CutiePro color palette
@@ -150,6 +152,7 @@ The test suite verifies palette values, attribute integrity, repeated and transp
 ## Project structure
 
 ```
+assets/                         # README preview image
 colors/cutiepro.lua             # :colorscheme entrypoint
 lua/cutiepro/init.lua           # setup and highlight application
 lua/cutiepro/palette.lua        # color definitions
