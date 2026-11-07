@@ -105,6 +105,22 @@ require("lualine").setup({
 })
 ```
 
+## Terminal themes
+
+### macOS Terminal.app
+
+A ready-made profile lives at `extras/terminal/CutiePro.terminal`. Double-click it to import it into Terminal → Settings → Profiles. Regenerate it after palette changes with:
+
+```sh
+swift extras/terminal/generate.swift extras/terminal/CutiePro.terminal
+```
+
+Terminal.app only supports 24-bit color on recent macOS releases. On older versions, only the 16 ANSI colors in the profile are exact.
+
+### WezTerm
+
+Copy `extras/wezterm/cutiepro.lua` next to your `wezterm.lua` and set `config.colors = require('cutiepro')`.
+
 ## Troubleshooting
 
 ### Colors look washed out or incorrect
@@ -160,6 +176,8 @@ lua/cutiepro/highlights.lua     # editor UI, LSP, diagnostics, diff
 lua/cutiepro/syntax.lua         # syntax, Treesitter, markup
 lua/cutiepro/plugins.lua        # plugin integrations
 lua/lualine/themes/cutiepro.lua # Lualine theme
+extras/wezterm/                 # WezTerm color scheme
+extras/terminal/                # macOS Terminal.app profile and generator
 test/                           # development configuration and tests
 ```
 
