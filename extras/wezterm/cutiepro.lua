@@ -9,14 +9,14 @@
 -- (github.com/cutiepro/cutiepro, schemes/WezTerm). Keep them in sync by hand.
 return {
 	foreground = '#d5d0c9',
-	background = '#181818',
+	background = '#181716', -- palette.bg, same as Neovim Normal
 
 	cursor_bg = '#e5a1a3',
-	cursor_fg = '#181818',
+	cursor_fg = '#181716',
 	cursor_border = '#e5a1a3',
 	compose_cursor = '#caa2ca', -- palette lilac, distinct from the cursor
 
-	selection_fg = '#d7c3ba',
+	selection_fg = '#d5d0c9', -- Neovim Visual keeps the text color
 	selection_bg = '#383838',
 
 	scrollbar_thumb = '#383838',
