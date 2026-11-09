@@ -3,7 +3,10 @@
 # Colors mirror lua/cutiepro/palette.lua and the Treesitter bash captures in
 # lua/cutiepro/syntax.lua. Keep them in sync by hand.
 
-zmodload zsh/nearcolor 2>/dev/null # approximate colors if 24-bit is unavailable
+# Approximate colors only when 24-bit is unavailable. Loading nearcolor
+# unconditionally snaps every hex color to the 256-color cube, which looks
+# brighter/off compared to Neovim.
+[[ $COLORTERM == (truecolor|24bit) ]] || zmodload zsh/nearcolor 2>/dev/null
 
 # macOS ls colors. BSD ls only supports the 16 ANSI colors, which the CutiePro
 # Terminal profile maps to the palette: pink (magenta) dirs, teal executables,
