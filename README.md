@@ -123,6 +123,8 @@ Terminal.app only supports 24-bit color on recent macOS releases. On older versi
 
 It also enables macOS `ls` colors (`CLICOLOR`, `LSCOLORS`), which can only use the 16 ANSI colors from the Terminal profile, so import `CutiePro.terminal` too.
 
+If you already use zsh-syntax-highlighting (and p10k/autosuggestions), source `extras/zsh/cutiepro-zsh-syntax-highlighting.zsh` after the plugins instead. It maps the plugin's styles to the same hex colors without it they use ANSI names and won't match Neovim.
+
 Hex colors need a true-color terminal. Otherwise zsh falls back to the nearest 256-color match. The highlighter is a lightweight tokenizer, so heredocs and nested expansions are only partly colored.
 
 ### WezTerm
@@ -186,7 +188,7 @@ lua/cutiepro/plugins.lua        # plugin integrations
 lua/lualine/themes/cutiepro.lua # Lualine theme
 extras/wezterm/                 # WezTerm color scheme
 extras/terminal/                # macOS Terminal.app profile and generator
-extras/zsh/                     # zsh command-line highlighting
+extras/zsh/                     # zsh command-line highlighting (standalone and zsh-syntax-highlighting)
 test/                           # development configuration and tests
 ```
 
