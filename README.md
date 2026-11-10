@@ -1,5 +1,10 @@
 # cutiepro.nvim
 
+![Stars](https://img.shields.io/github/stars/ryanjayleyva/cutiepro.nvim?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/ryanjayleyva/cutiepro.nvim?style=for-the-badge)
+![License](https://img.shields.io/github/license/ryanjayleyva/cutiepro.nvim?style=for-the-badge)
+![Neovim](https://img.shields.io/badge/Neovim-0.12+-green?style=for-the-badge&logo=neovim)
+
 A dark pastel colorscheme for Neovim, ported from CutiePro 🩷
 
 Warm pinks, muted olive greens, lilac functions, and soft neutral backgrounds, bringing the CutiePro aesthetic to your Neovim setup.
