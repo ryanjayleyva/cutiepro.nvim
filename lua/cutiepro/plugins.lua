@@ -3,7 +3,9 @@
 -- not installed.
 local M = {}
 
-function M.get(p, _)
+function M.get(p, cfg)
+	local bg = cfg.transparent and 'NONE' or p.bg
+
 	return {
 		-- gitsigns
 		{ 'GitSignsAdd', { fg = p.green } },
@@ -11,14 +13,17 @@ function M.get(p, _)
 		{ 'GitSignsDelete', { fg = p.red } },
 
 		-- Telescope
-		{ 'TelescopeNormal', { fg = p.fg, bg = p.bg_popup } },
-		{ 'TelescopeBorder', { fg = p.border, bg = p.bg_popup } },
-		{ 'TelescopePromptNormal', { fg = p.fg, bg = p.bg_popup } },
+		{ 'TelescopeNormal', { fg = p.fg, bg = bg } },
+		{ 'TelescopeBorder', { fg = p.border, bg = bg } },
+		{ 'TelescopePromptNormal', { fg = p.fg, bg = bg } },
 		-- The prompt border uses the prompt background color so it
 		-- stays invisible.
-		{ 'TelescopePromptBorder', { fg = p.bg_popup, bg = p.bg_popup } },
+		{ 'TelescopePromptBorder', { fg = bg, bg = bg } },
 		{ 'TelescopePromptTitle', { fg = p.accent, bold = true } },
 		{ 'TelescopeResultsTitle', { fg = p.fg_dim } },
+		-- The counter links to NonText by default, which is nearly
+		-- invisible on the editor background.
+		{ 'TelescopePromptCounter', { fg = p.fg_dim } },
 		{ 'TelescopePreviewTitle', { fg = p.green } },
 		{
 			'TelescopeSelection',
