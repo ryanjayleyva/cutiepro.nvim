@@ -72,6 +72,7 @@ local ok, err = pcall(function()
 	-- 4. Integration groups are defined even without the plugins installed
 	for _, g in ipairs({
 		'TelescopeSelection',
+		'TelescopePromptCounter',
 		'GitSignsAdd',
 		'CmpItemKind',
 		'IblIndent',
