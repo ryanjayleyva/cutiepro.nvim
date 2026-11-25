@@ -4,7 +4,7 @@ local M = {}
 function M.get(palette)
 	return {
 		-- Backdrop behind the window
-		{ 'MasonBackdrop', { bg = palette.background_panel } },
+		{ 'MasonBackdrop', { bg = palette.background } },
 
 		-- Window headers
 		{

@@ -6,27 +6,11 @@ local files = {}
 
 local editor_colors = {
 	'background',
-	'background_panel',
-	'background_gutter',
-	'background_cursorline',
 	'background_selection',
-	'background_popup',
 	'foreground',
 	'foreground_bright',
 	'foreground_muted',
 	'border',
-}
-
--- The colors that are not one of the 16 terminal colors, with where they show
-local syntax_colors = {
-	{ name = 'orange', usage = 'Special characters, attributes and warnings' },
-	{ name = 'lilac', usage = 'Functions and preprocessor' },
-	{ name = 'sky', usage = 'Numbers, characters and escapes' },
-	{ name = 'mint', usage = 'Builtin types' },
-	{ name = 'leaf', usage = 'Labels and macros' },
-	{ name = 'pink', usage = 'Links and underlined text' },
-	{ name = 'peach', usage = 'Markdown quotes' },
-	{ name = 'lemon', usage = 'Matching brackets' },
 }
 
 -- Every color shown in the README needs a name in palette.lua
@@ -41,8 +25,9 @@ local function swatch_image(name, hex)
 	local path = 'assets/swatches/' .. hex:sub(2) .. '.svg'
 	files[path] = shared.join_lines({
 		'<svg xmlns="http://www.w3.org/2000/svg" width="40" height="16" viewBox="0 0 40 16">',
-		('\t<rect x="0.5" y="0.5" width="39" height="15" rx="3" fill="%s" stroke="#808080" stroke-opacity="0.5"/>'):format(
-			hex
+		('\t<rect x="0.5" y="0.5" width="39" height="15" rx="3" fill="%s" stroke="%s" stroke-opacity="0.5"/>'):format(
+			hex,
+			palette.foreground_muted
 		),
 		'</svg>',
 	})
@@ -101,31 +86,12 @@ local function build_palette_tables()
 		})
 	end
 
-	local syntax_rows = { { 'Name', 'Color', 'Hex', 'Used for' } }
-	for _, syntax_color in ipairs(syntax_colors) do
-		local hex = palette[syntax_color.name]
-		assert(
-			color_name(hex) == syntax_color.name,
-			'palette.lua names ' .. hex .. ' ' .. color_name(hex)
-		)
-		table.insert(syntax_rows, {
-			syntax_color.name,
-			swatch_image(syntax_color.name, hex),
-			('`%s`'):format(hex),
-			syntax_color.usage,
-		})
-	end
-
 	return table.concat({
 		markdown_table(base_rows),
 		'',
 		'### Editor colors',
 		'',
 		markdown_table(editor_rows),
-		'',
-		'### Syntax colors',
-		'',
-		markdown_table(syntax_rows),
 	}, '\n')
 end
 

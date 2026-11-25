@@ -9,16 +9,16 @@ function M.get(palette)
 		-- Sign groups. nvim-dap does not use them until a sign definition
 		-- sets texthl, for example vim.fn.sign_define('DapBreakpoint', {
 		-- texthl = 'DapBreakpoint' })
-		{ 'DapBreakpoint', { fg = palette.red } },
+		{ 'DapBreakpoint', { fg = palette.strawberry } },
 		{ 'DapBreakpointCondition', { fg = palette.bright_yellow } },
 		{ 'DapBreakpointRejected', { fg = palette.foreground_muted } },
 		{ 'DapLogPoint', { fg = palette.bright_blue } },
-		{ 'DapStopped', { fg = palette.green } },
+		{ 'DapStopped', { fg = palette.sour_apple } },
 
 		-- Same as the other floating windows
 		{ 'DapUIFloatBorder', { link = 'FloatBorder' } },
-		-- The stop button is red, as a destructive action
-		{ 'DapUIStop', { fg = palette.red } },
+		-- The stop button is strawberry, as a destructive action
+		{ 'DapUIStop', { fg = palette.strawberry } },
 	}
 end
 

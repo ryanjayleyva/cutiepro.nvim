@@ -56,7 +56,7 @@ assert(
 	)
 )
 
--- '#e5a1a3' to the three sRGB channels, each from 0 to 1
+-- Splits a hex color into its three sRGB channels, each from 0 to 1
 local function srgb_channels(hex)
 	local channels = {}
 	for index = 1, 3 do

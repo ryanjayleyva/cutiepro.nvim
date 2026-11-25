@@ -9,21 +9,21 @@
 [[ $COLORTERM == (truecolor|24bit) ]] || zmodload zsh/nearcolor 2>/dev/null
 
 # macOS ls colors. BSD ls only supports the 16 ANSI colors, which the CutiePro
-# Terminal profile maps to the palette: pink (magenta) dirs, teal executables,
-# cyan-green links, yellow pipes and devices. Regular files keep the default
+# Terminal profile maps to the palette: magenta dirs, blue executables,
+# cyan links, sand pipes and devices. Regular files keep the default
 # text color. Pairs are foreground+background (x = default); uppercase is bold.
-# Letters: a black, b red, c green, d yellow, e blue (teal), f magenta, g cyan.
+# Letters: a black, b strawberry, c sour_apple, d sand, e blue, f magenta, g cyan.
 export CLICOLOR=1
 export LSCOLORS=FxgxcxdxexdxdxbxbxFxFx
 
 typeset -gA _cutiepro=(
-	command   'fg=#caa2ca'        # @function.call
-	builtin   'fg=#caa2ca,italic' # @function.builtin
+	command   'fg=#c3a6cb'        # @function.call
+	builtin   'fg=#c3a6cb,italic' # @function.builtin
 	keyword   'fg=#f56e7f'        # @keyword
 	error     'fg=#f56e7f'        # Error (unknown command)
 	string    'fg=#bec975'        # @string
 	argument  'fg=#e5a1a3'        # @variable.parameter / @variable
-	number    'fg=#a5b6ce'        # @number
+	number    'fg=#80c5de'        # @number
 	operator  'fg=#e8d6a7'        # @operator, @punctuation
 	comment   'fg=#88847f'        # @comment
 )

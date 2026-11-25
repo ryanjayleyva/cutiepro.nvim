@@ -39,6 +39,9 @@ function M.setup(user_options)
 	-- Options apply on load, so reload when the colorscheme is already active
 	if vim.g.colors_name == 'cutiepro' then
 		M.load()
+		-- Plugins redefine their default groups on this event, and loading
+		-- the colorscheme by name already fires it
+		vim.api.nvim_exec_autocmds('ColorScheme', { pattern = 'cutiepro' })
 	end
 end
 

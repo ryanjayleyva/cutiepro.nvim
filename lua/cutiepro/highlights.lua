@@ -4,10 +4,7 @@ local M = {}
 function M.get(palette, options)
 	-- Transparent mode uses the terminal background
 	local background = options.transparent and 'NONE' or palette.background
-	local background_gutter = options.transparent and 'NONE'
-		or palette.background_gutter
-	local background_popup = options.transparent and 'NONE'
-		or palette.background_popup
+	local background_popup = options.transparent and 'NONE' or palette.border
 
 	return {
 		-- Base
@@ -30,22 +27,22 @@ function M.get(palette, options)
 		{ 'lCursor', { fg = palette.background, bg = palette.accent } },
 		{ 'CursorIM', { fg = palette.background, bg = palette.accent } },
 		{ 'TermCursor', { fg = palette.background, bg = palette.accent } },
-		{ 'CursorLine', { bg = palette.background_cursorline } },
-		{ 'CursorColumn', { bg = palette.background_cursorline } },
-		{ 'ColorColumn', { bg = palette.background_cursorline } },
+		{ 'CursorLine', { bg = palette.border } },
+		{ 'CursorColumn', { bg = palette.border } },
+		{ 'ColorColumn', { bg = palette.border } },
 
 		-- Gutter
-		{ 'LineNr', { fg = palette.foreground_muted, bg = background_gutter } },
+		{ 'LineNr', { fg = palette.foreground_muted, bg = background } },
 		{
 			'CursorLineNr',
-			{ fg = palette.accent, bg = background_gutter, bold = true },
+			{ fg = palette.accent, bg = background, bold = true },
 		},
-		{ 'SignColumn', { bg = background_gutter } },
+		{ 'SignColumn', { bg = background } },
 		{
 			'FoldColumn',
-			{ fg = palette.foreground_muted, bg = background_gutter },
+			{ fg = palette.foreground_muted, bg = background },
 		},
-		{ 'Folded', { fg = palette.foreground_muted, bg = background_gutter } },
+		{ 'Folded', { fg = palette.foreground_muted, bg = background } },
 
 		-- Selection and search
 		{ 'Visual', { bg = palette.background_selection } },
@@ -56,15 +53,19 @@ function M.get(palette, options)
 			{ fg = palette.background, bg = palette.accent, bold = true },
 		},
 		{ 'IncSearch', { fg = palette.background, bg = palette.bright_blue } },
-		-- Lemon is the cursor match color from the Helix port
+		-- Bright yellow stands out from the selection color
 		{
 			'MatchParen',
-			{ fg = palette.lemon, bg = palette.background_selection, bold = true },
+			{
+				fg = palette.bright_yellow,
+				bg = palette.background_selection,
+				bold = true,
+			},
 		},
 		{ 'QuickFixLine', { bg = palette.background_selection, bold = true } },
 
 		-- Completion and wildmenu
-		{ 'Pmenu', { fg = palette.foreground, bg = palette.background_popup } },
+		{ 'Pmenu', { fg = palette.foreground, bg = palette.border } },
 		{
 			'PmenuSel',
 			{ fg = palette.accent, bg = palette.background_selection, bold = true },
@@ -81,13 +82,13 @@ function M.get(palette, options)
 		{ 'StatusLine', { fg = palette.foreground, bg = palette.border } },
 		{
 			'StatusLineNC',
-			{ fg = palette.foreground_muted, bg = palette.background_panel },
+			{ fg = palette.foreground_muted, bg = palette.background },
 		},
 		{
 			'TabLine',
-			{ fg = palette.foreground_muted, bg = palette.background_panel },
+			{ fg = palette.foreground_muted, bg = palette.background },
 		},
-		{ 'TabLineFill', { bg = palette.background_panel } },
+		{ 'TabLineFill', { bg = palette.background } },
 		{
 			'TabLineSel',
 			{ fg = palette.accent, bg = palette.border, bold = true },
@@ -96,16 +97,16 @@ function M.get(palette, options)
 		-- Messages
 		{ 'Title', { fg = palette.accent, bold = true } },
 		{ 'Directory', { fg = palette.bright_blue } },
-		{ 'Question', { fg = palette.red } },
+		{ 'Question', { fg = palette.strawberry } },
 		{ 'ModeMsg', { fg = palette.foreground, bold = true } },
-		{ 'MoreMsg', { fg = palette.green } },
-		{ 'ErrorMsg', { fg = palette.red, bold = true } },
+		{ 'MoreMsg', { fg = palette.sour_apple } },
+		{ 'ErrorMsg', { fg = palette.strawberry, bold = true } },
 		{ 'WarningMsg', { fg = palette.bright_yellow } },
 
 		-- Diff
-		{ 'DiffAdd', { fg = palette.green } },
+		{ 'DiffAdd', { fg = palette.sour_apple } },
 		{ 'DiffChange', { fg = palette.accent } },
-		{ 'DiffDelete', { fg = palette.red } },
+		{ 'DiffDelete', { fg = palette.strawberry } },
 		{
 			'DiffText',
 			{
@@ -116,14 +117,16 @@ function M.get(palette, options)
 		},
 
 		-- Diagnostics
-		-- Warning and info use the bright yellow and bright blue terminal
-		-- colors, which match the Zed port
-		{ 'DiagnosticError', { fg = palette.red } },
+		-- Warning and info use the bright yellow and bright blue terminal colors
+		{ 'DiagnosticError', { fg = palette.strawberry } },
 		{ 'DiagnosticWarn', { fg = palette.bright_yellow } },
 		{ 'DiagnosticInfo', { fg = palette.bright_blue } },
 		{ 'DiagnosticHint', { fg = palette.foreground_muted } },
-		{ 'DiagnosticOk', { fg = palette.green } },
-		{ 'DiagnosticUnderlineError', { undercurl = true, sp = palette.red } },
+		{ 'DiagnosticOk', { fg = palette.sour_apple } },
+		{
+			'DiagnosticUnderlineError',
+			{ undercurl = true, sp = palette.strawberry },
+		},
 		{
 			'DiagnosticUnderlineWarn',
 			{ undercurl = true, sp = palette.bright_yellow },
@@ -136,7 +139,7 @@ function M.get(palette, options)
 			'DiagnosticUnderlineHint',
 			{ undercurl = true, sp = palette.foreground_muted },
 		},
-		{ 'DiagnosticVirtualTextError', { fg = palette.red } },
+		{ 'DiagnosticVirtualTextError', { fg = palette.strawberry } },
 		{ 'DiagnosticVirtualTextWarn', { fg = palette.bright_yellow } },
 		{ 'DiagnosticVirtualTextInfo', { fg = palette.bright_blue } },
 		{ 'DiagnosticVirtualTextHint', { fg = palette.foreground_muted } },
@@ -147,11 +150,11 @@ function M.get(palette, options)
 		{ 'LspReferenceWrite', { bg = palette.background_selection } },
 		{
 			'LspSignatureActiveParameter',
-			{ fg = palette.orange, bold = true },
+			{ fg = palette.bright_yellow, bold = true },
 		},
 		{
 			'LspInfoBorder',
-			{ fg = palette.border, bg = palette.background_popup },
+			{ fg = palette.border, bg = palette.border },
 		},
 	}
 end
