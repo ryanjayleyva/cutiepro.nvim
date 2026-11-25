@@ -10,6 +10,7 @@ local plugin_modules = {
 	'telescope',
 	'indent-blankline',
 	'treesitter-context',
+	'dap',
 }
 
 function M.get(palette, options)
