@@ -6,20 +6,20 @@ function M.get(palette)
 		-- Test status
 		{ 'NeotestPassed', { fg = palette.green } },
 		{ 'NeotestFailed', { fg = palette.red } },
-		{ 'NeotestRunning', { fg = palette.bright_yellow } },
-		{ 'NeotestSkipped', { fg = palette.bright_blue } },
-		{ 'NeotestWatching', { fg = palette.bright_yellow } },
+		{ 'NeotestRunning', { fg = palette.accent } },
+		{ 'NeotestSkipped', { fg = palette.sky } },
+		{ 'NeotestWatching', { fg = palette.accent } },
 		{ 'NeotestTarget', { fg = palette.red } },
 
 		-- Summary tree
-		{ 'NeotestNamespace', { fg = palette.yellow } },
-		{ 'NeotestFile', { fg = palette.bright_blue } },
-		{ 'NeotestDir', { fg = palette.bright_blue } },
-		{ 'NeotestAdapterName', { fg = palette.yellow, bold = true } },
+		{ 'NeotestNamespace', { fg = palette.sky } },
+		{ 'NeotestFile', { fg = palette.green } },
+		{ 'NeotestDir', { fg = palette.green } },
+		{ 'NeotestAdapterName', { fg = palette.accent, bold = true } },
 		{ 'NeotestIndent', { fg = palette.border } },
 		{ 'NeotestExpandMarker', { fg = palette.foreground_muted } },
-		{ 'NeotestMarked', { fg = palette.bright_yellow, bold = true } },
-		{ 'NeotestWinSelect', { fg = palette.bright_blue, bold = true } },
+		{ 'NeotestMarked', { fg = palette.accent, bold = true } },
+		{ 'NeotestWinSelect', { fg = palette.accent, bold = true } },
 	}
 end
 
