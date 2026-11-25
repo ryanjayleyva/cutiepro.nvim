@@ -4,21 +4,11 @@
 -- installed
 local M = {}
 
-local plugin_modules = { 'gitsigns', 'telescope' }
+local plugin_modules = { 'gitsigns', 'cmp', 'telescope' }
 
--- nvim-cmp and indent-blankline, until they get their own modules
+-- indent-blankline, until it gets its own module
 local function remaining_groups(palette)
 	return {
-		-- nvim-cmp
-		{ 'CmpItemMenu', { fg = palette.foreground_muted } },
-		{ 'CmpItemKind', { fg = palette.lilac } },
-		{ 'CmpItemKindVariable', { fg = palette.accent } },
-		{ 'CmpItemKindFunction', { fg = palette.lilac } },
-		{ 'CmpItemKindMethod', { fg = palette.lilac } },
-		{ 'CmpItemKindKeyword', { fg = palette.red } },
-		{ 'CmpItemKindSnippet', { fg = palette.green } },
-		{ 'CmpItemKindText', { fg = palette.foreground_muted } },
-
 		-- indent-blankline
 		{ 'IblIndent', { fg = palette.border } },
 		{ 'IblScope', { fg = palette.foreground_muted } },
