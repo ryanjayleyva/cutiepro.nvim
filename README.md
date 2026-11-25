@@ -199,21 +199,64 @@ test/                           # development configuration and tests
 
 ## Palette
 
-| Role             | Hex       |
-| ---------------- | --------- |
-| Background       | `#181716` |
-| Foreground       | `#d5d0c9` |
-| Comment / muted  | `#88847f` |
-| Selection        | `#383838` |
-| Cursorline       | `#242628` |
-| Border           | `#2e2a27` |
-| Accent / pink    | `#e5a1a3` |
-| Keyword / red    | `#f56e7f` |
-| String / green   | `#bec975` |
-| Type / coral     | `#f58669` |
-| Function / lilac | `#caa2ca` |
-| Operator / cream | `#e8d6a7` |
-| Number / sky     | `#a5b6ce` |
+The editor colors reuse the terminal colors where they can. The syntax colors
+are the ones the terminal does not need.
+
+### Base colors (ANSI 0-15)
+
+These also set the `:terminal` colors inside Neovim. The tables below are
+generated from `lua/cutiepro/palette.lua` by `scripts/build-extras.lua`.
+
+<!-- palette:start -->
+
+| Index | Name              | Color                                            | Hex       |
+| ----- | ----------------- | ------------------------------------------------ | --------- |
+| 0     | black             | ![black](assets/swatches/000000.svg)             | `#000000` |
+| 1     | red               | ![red](assets/swatches/f56e7f.svg)               | `#f56e7f` |
+| 2     | green             | ![green](assets/swatches/bec975.svg)             | `#bec975` |
+| 3     | yellow            | ![yellow](assets/swatches/f58669.svg)            | `#f58669` |
+| 4     | teal              | ![teal](assets/swatches/42d9c5.svg)              | `#42d9c5` |
+| 5     | magenta           | ![magenta](assets/swatches/d286b7.svg)           | `#d286b7` |
+| 6     | cyan              | ![cyan](assets/swatches/37cb8a.svg)              | `#37cb8a` |
+| 7     | foreground_muted  | ![foreground_muted](assets/swatches/88847f.svg)  | `#88847f` |
+| 8     | border            | ![border](assets/swatches/2e2a27.svg)            | `#2e2a27` |
+| 9     | accent            | ![accent](assets/swatches/e5a1a3.svg)            | `#e5a1a3` |
+| 10    | cream             | ![cream](assets/swatches/e8d6a7.svg)             | `#e8d6a7` |
+| 11    | bright_yellow     | ![bright_yellow](assets/swatches/f3b061.svg)     | `#f3b061` |
+| 12    | bright_blue       | ![bright_blue](assets/swatches/80c5de.svg)       | `#80c5de` |
+| 13    | bright_magenta    | ![bright_magenta](assets/swatches/c3a6cb.svg)    | `#c3a6cb` |
+| 14    | bright_cyan       | ![bright_cyan](assets/swatches/9ed7a8.svg)       | `#9ed7a8` |
+| 15    | foreground_bright | ![foreground_bright](assets/swatches/d7c3ba.svg) | `#d7c3ba` |
+
+### Editor colors
+
+| Role                  | Color                                                | Hex       |
+| --------------------- | ---------------------------------------------------- | --------- |
+| background            | ![background](assets/swatches/181716.svg)            | `#181716` |
+| background_panel      | ![background_panel](assets/swatches/181818.svg)      | `#181818` |
+| background_gutter     | ![background_gutter](assets/swatches/212121.svg)     | `#212121` |
+| background_cursorline | ![background_cursorline](assets/swatches/242628.svg) | `#242628` |
+| background_selection  | ![background_selection](assets/swatches/383838.svg)  | `#383838` |
+| background_popup      | ![background_popup](assets/swatches/1f1e1b.svg)      | `#1f1e1b` |
+| foreground            | ![foreground](assets/swatches/d5d0c9.svg)            | `#d5d0c9` |
+| foreground_bright     | ![foreground_bright](assets/swatches/d7c3ba.svg)     | `#d7c3ba` |
+| foreground_muted      | ![foreground_muted](assets/swatches/88847f.svg)      | `#88847f` |
+| border                | ![border](assets/swatches/2e2a27.svg)                | `#2e2a27` |
+
+### Syntax colors
+
+| Name   | Color                                 | Hex       | Used for                                    |
+| ------ | ------------------------------------- | --------- | ------------------------------------------- |
+| orange | ![orange](assets/swatches/f4b86a.svg) | `#f4b86a` | Special characters, attributes and warnings |
+| lilac  | ![lilac](assets/swatches/caa2ca.svg)  | `#caa2ca` | Functions and preprocessor                  |
+| sky    | ![sky](assets/swatches/a5b6ce.svg)    | `#a5b6ce` | Numbers, characters and escapes             |
+| mint   | ![mint](assets/swatches/5dccc3.svg)   | `#5dccc3` | Builtin types                               |
+| leaf   | ![leaf](assets/swatches/97ca95.svg)   | `#97ca95` | Labels and macros                           |
+| pink   | ![pink](assets/swatches/ef7dc0.svg)   | `#ef7dc0` | Links and underlined text                   |
+| peach  | ![peach](assets/swatches/e4b99d.svg)  | `#e4b99d` | Markdown quotes                             |
+| lemon  | ![lemon](assets/swatches/ffef43.svg)  | `#ffef43` | Matching brackets                           |
+
+<!-- palette:end -->
 
 ## Credits
 
