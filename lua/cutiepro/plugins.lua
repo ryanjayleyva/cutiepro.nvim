@@ -11,6 +11,7 @@ local plugin_modules = {
 	'indent-blankline',
 	'treesitter-context',
 	'dap',
+	'neotest',
 }
 
 function M.get(palette, options)
