@@ -1,106 +1,158 @@
--- Editor UI, LSP, diagnostics, and diff highlight groups.
--- Add new UI-facing groups here and reference palette keys from
--- cutiepro.palette instead of raw color values.
+-- Editor UI highlight groups (Normal, StatusLine, Pmenu, ...)
 local M = {}
 
-function M.get(p, cfg)
-	-- Transparency replaces panel backgrounds with 'NONE' so the
-	-- terminal background shows through.
-	local bg = cfg.transparent and 'NONE' or p.bg
-	local gutter_bg = cfg.transparent and 'NONE' or p.bg_gutter
+function M.get(palette, options)
+	-- Transparent mode uses the terminal background
+	local background = options.transparent and 'NONE' or palette.background
+	local background_gutter = options.transparent and 'NONE'
+		or palette.background_gutter
+	local background_popup = options.transparent and 'NONE'
+		or palette.background_popup
 
 	return {
-		-- Core editor
-		{ 'Normal', { fg = p.fg, bg = bg } },
-		{ 'NormalNC', { fg = p.fg, bg = bg } },
-		{
-			'NormalFloat',
-			{ fg = p.fg, bg = cfg.transparent and 'NONE' or p.bg_popup },
-		},
-		{
-			'FloatBorder',
-			{ fg = p.border, bg = cfg.transparent and 'NONE' or p.bg_popup },
-		},
-		{ 'FloatTitle', { fg = p.accent, bold = true } },
-		{ 'EndOfBuffer', { fg = p.border } },
-		{ 'NonText', { fg = p.border } },
-		{ 'Whitespace', { fg = p.border } },
-		{ 'SpecialKey', { fg = p.border } },
-		{ 'Conceal', { fg = p.fg_dim } },
-		{ 'Cursor', { fg = p.bg, bg = p.accent } },
-		{ 'lCursor', { fg = p.bg, bg = p.accent } },
-		{ 'CursorIM', { fg = p.bg, bg = p.accent } },
-		{ 'TermCursor', { fg = p.bg, bg = p.accent } },
-		{ 'CursorLine', { bg = p.bg_cursorline } },
-		{ 'CursorColumn', { bg = p.bg_cursorline } },
-		{ 'ColorColumn', { bg = p.bg_cursorline } },
-		{ 'LineNr', { fg = p.fg_dim, bg = gutter_bg } },
-		{ 'CursorLineNr', { fg = p.accent, bg = gutter_bg, bold = true } },
-		{ 'SignColumn', { bg = gutter_bg } },
-		{ 'FoldColumn', { fg = p.fg_dim, bg = gutter_bg } },
-		{ 'Folded', { fg = p.fg_dim, bg = gutter_bg } },
-		{ 'Visual', { bg = p.bg_highlight } },
-		{ 'VisualNOS', { bg = p.bg_highlight } },
-		{ 'Search', { fg = p.bg, bg = p.accent } },
-		{ 'CurSearch', { fg = p.bg, bg = p.accent, bold = true } },
-		{ 'IncSearch', { fg = p.bg, bg = p.ansi[13] } },
-		-- MatchParen uses the Helix port's lemon cursor-match color.
-		{ 'MatchParen', { fg = p.lemon, bg = p.bg_highlight, bold = true } },
-		{ 'QuickFixLine', { bg = p.bg_highlight, bold = true } },
+		-- Base
+		{ 'Normal', { fg = palette.foreground, bg = background } },
+		{ 'NormalNC', { fg = palette.foreground, bg = background } },
+		{ 'NormalFloat', { fg = palette.foreground, bg = background_popup } },
+		{ 'FloatBorder', { fg = palette.border, bg = background_popup } },
+		{ 'FloatTitle', { fg = palette.accent, bold = true } },
+		{ 'MsgArea', { fg = palette.foreground } },
+		{ 'EndOfBuffer', { fg = palette.border } },
 
-		-- Menus
-		{ 'Pmenu', { fg = p.fg, bg = p.bg_popup } },
-		{ 'PmenuSel', { fg = p.accent, bg = p.bg_highlight, bold = true } },
-		{ 'PmenuSbar', { bg = p.bg_highlight } },
-		{ 'PmenuThumb', { bg = p.accent } },
-		{ 'WildMenu', { fg = p.accent, bg = p.bg_highlight, bold = true } },
+		-- Invisible characters
+		{ 'NonText', { fg = palette.border } },
+		{ 'Whitespace', { fg = palette.border } },
+		{ 'SpecialKey', { fg = palette.border } },
+		{ 'Conceal', { fg = palette.foreground_muted } },
+
+		-- Cursor
+		{ 'Cursor', { fg = palette.background, bg = palette.accent } },
+		{ 'lCursor', { fg = palette.background, bg = palette.accent } },
+		{ 'CursorIM', { fg = palette.background, bg = palette.accent } },
+		{ 'TermCursor', { fg = palette.background, bg = palette.accent } },
+		{ 'CursorLine', { bg = palette.background_cursorline } },
+		{ 'CursorColumn', { bg = palette.background_cursorline } },
+		{ 'ColorColumn', { bg = palette.background_cursorline } },
+
+		-- Gutter
+		{ 'LineNr', { fg = palette.foreground_muted, bg = background_gutter } },
+		{
+			'CursorLineNr',
+			{ fg = palette.accent, bg = background_gutter, bold = true },
+		},
+		{ 'SignColumn', { bg = background_gutter } },
+		{
+			'FoldColumn',
+			{ fg = palette.foreground_muted, bg = background_gutter },
+		},
+		{ 'Folded', { fg = palette.foreground_muted, bg = background_gutter } },
+
+		-- Selection and search
+		{ 'Visual', { bg = palette.background_selection } },
+		{ 'VisualNOS', { bg = palette.background_selection } },
+		{ 'Search', { fg = palette.background, bg = palette.accent } },
+		{
+			'CurSearch',
+			{ fg = palette.background, bg = palette.accent, bold = true },
+		},
+		{ 'IncSearch', { fg = palette.background, bg = palette.bright_blue } },
+		-- Lemon is the cursor match color from the Helix port
+		{
+			'MatchParen',
+			{ fg = palette.lemon, bg = palette.background_selection, bold = true },
+		},
+		{ 'QuickFixLine', { bg = palette.background_selection, bold = true } },
+
+		-- Completion and wildmenu
+		{ 'Pmenu', { fg = palette.foreground, bg = palette.background_popup } },
+		{
+			'PmenuSel',
+			{ fg = palette.accent, bg = palette.background_selection, bold = true },
+		},
+		{ 'PmenuSbar', { bg = palette.background_selection } },
+		{ 'PmenuThumb', { bg = palette.accent } },
+		{
+			'WildMenu',
+			{ fg = palette.accent, bg = palette.background_selection, bold = true },
+		},
 
 		-- Windows and tabs
-		{ 'WinSeparator', { fg = p.border } },
-		{ 'StatusLine', { fg = p.fg, bg = p.border } },
-		{ 'StatusLineNC', { fg = p.fg_dim, bg = p.bg_alt } },
-		{ 'TabLine', { fg = p.fg_dim, bg = p.bg_alt } },
-		{ 'TabLineFill', { bg = p.bg_alt } },
-		{ 'TabLineSel', { fg = p.accent, bg = p.border, bold = true } },
+		{ 'WinSeparator', { fg = palette.border } },
+		{ 'StatusLine', { fg = palette.foreground, bg = palette.border } },
+		{
+			'StatusLineNC',
+			{ fg = palette.foreground_muted, bg = palette.background_panel },
+		},
+		{
+			'TabLine',
+			{ fg = palette.foreground_muted, bg = palette.background_panel },
+		},
+		{ 'TabLineFill', { bg = palette.background_panel } },
+		{
+			'TabLineSel',
+			{ fg = palette.accent, bg = palette.border, bold = true },
+		},
 
 		-- Messages
-		{ 'Title', { fg = p.accent, bold = true } },
-		{ 'Directory', { fg = p.ansi[13] } },
-		{ 'Question', { fg = p.red } },
-		{ 'ModeMsg', { fg = p.fg, bold = true } },
-		{ 'MoreMsg', { fg = p.green } },
-		{ 'MsgArea', { fg = p.fg } },
-		{ 'ErrorMsg', { fg = p.red, bold = true } },
-		{ 'WarningMsg', { fg = p.ansi[12] } },
+		{ 'Title', { fg = palette.accent, bold = true } },
+		{ 'Directory', { fg = palette.bright_blue } },
+		{ 'Question', { fg = palette.red } },
+		{ 'ModeMsg', { fg = palette.foreground, bold = true } },
+		{ 'MoreMsg', { fg = palette.green } },
+		{ 'ErrorMsg', { fg = palette.red, bold = true } },
+		{ 'WarningMsg', { fg = palette.bright_yellow } },
 
 		-- Diff
-		{ 'DiffAdd', { fg = p.green } },
-		{ 'DiffChange', { fg = p.accent } },
-		{ 'DiffDelete', { fg = p.red } },
-		{ 'DiffText', { fg = p.fg, bg = p.bg_highlight, bold = true } },
+		{ 'DiffAdd', { fg = palette.green } },
+		{ 'DiffChange', { fg = palette.accent } },
+		{ 'DiffDelete', { fg = palette.red } },
+		{
+			'DiffText',
+			{
+				fg = palette.foreground,
+				bg = palette.background_selection,
+				bold = true,
+			},
+		},
 
 		-- Diagnostics
-		-- Warning and info reuse ANSI 11 (bright yellow) and ANSI 12
-		-- (bright blue), which match the Zed port's warning and info
-		-- colors.
-		{ 'DiagnosticError', { fg = p.red } },
-		{ 'DiagnosticWarn', { fg = p.ansi[12] } },
-		{ 'DiagnosticInfo', { fg = p.ansi[13] } },
-		{ 'DiagnosticHint', { fg = p.fg_dim } },
-		{ 'DiagnosticOk', { fg = p.green } },
-		{ 'DiagnosticUnderlineError', { undercurl = true, sp = p.red } },
-		{ 'DiagnosticUnderlineWarn', { undercurl = true, sp = p.ansi[12] } },
-		{ 'DiagnosticUnderlineInfo', { undercurl = true, sp = p.ansi[13] } },
-		{ 'DiagnosticUnderlineHint', { undercurl = true, sp = p.fg_dim } },
-		{ 'DiagnosticVirtualTextError', { fg = p.red } },
-		{ 'DiagnosticVirtualTextWarn', { fg = p.ansi[12] } },
-		{ 'DiagnosticVirtualTextInfo', { fg = p.ansi[13] } },
-		{ 'DiagnosticVirtualTextHint', { fg = p.fg_dim } },
-		{ 'LspReferenceText', { bg = p.border } },
-		{ 'LspReferenceRead', { bg = p.border } },
-		{ 'LspReferenceWrite', { bg = p.bg_highlight } },
-		{ 'LspSignatureActiveParameter', { fg = p.orange, bold = true } },
-		{ 'LspInfoBorder', { fg = p.border, bg = p.bg_popup } },
+		-- Warning and info use the bright yellow and bright blue terminal
+		-- colors, which match the Zed port
+		{ 'DiagnosticError', { fg = palette.red } },
+		{ 'DiagnosticWarn', { fg = palette.bright_yellow } },
+		{ 'DiagnosticInfo', { fg = palette.bright_blue } },
+		{ 'DiagnosticHint', { fg = palette.foreground_muted } },
+		{ 'DiagnosticOk', { fg = palette.green } },
+		{ 'DiagnosticUnderlineError', { undercurl = true, sp = palette.red } },
+		{
+			'DiagnosticUnderlineWarn',
+			{ undercurl = true, sp = palette.bright_yellow },
+		},
+		{
+			'DiagnosticUnderlineInfo',
+			{ undercurl = true, sp = palette.bright_blue },
+		},
+		{
+			'DiagnosticUnderlineHint',
+			{ undercurl = true, sp = palette.foreground_muted },
+		},
+		{ 'DiagnosticVirtualTextError', { fg = palette.red } },
+		{ 'DiagnosticVirtualTextWarn', { fg = palette.bright_yellow } },
+		{ 'DiagnosticVirtualTextInfo', { fg = palette.bright_blue } },
+		{ 'DiagnosticVirtualTextHint', { fg = palette.foreground_muted } },
+
+		-- LSP
+		{ 'LspReferenceText', { bg = palette.border } },
+		{ 'LspReferenceRead', { bg = palette.border } },
+		{ 'LspReferenceWrite', { bg = palette.background_selection } },
+		{
+			'LspSignatureActiveParameter',
+			{ fg = palette.orange, bold = true },
+		},
+		{
+			'LspInfoBorder',
+			{ fg = palette.border, bg = palette.background_popup },
+		},
 	}
 end
 

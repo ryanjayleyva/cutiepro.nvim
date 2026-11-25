@@ -59,6 +59,10 @@ M.leaf = leaf
 M.pink = pink
 M.peach = peach
 M.lemon = lemon
+M.bright_yellow = bright_yellow
+M.bright_blue = bright_blue
+M.bright_magenta = bright_magenta
+M.bright_cyan = bright_cyan
 
 -- Maps each hex above back to its name, for docs and generators
 local named = {
