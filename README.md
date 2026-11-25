@@ -22,6 +22,7 @@ Warm pinks, muted olive greens, lilac functions, and soft neutral backgrounds, b
 - nvim-treesitter-context, nvim-dap, neotest, mason, kulala and vim-dadbod-ui highlights
 - Indent guides and editor UI highlights
 - Lualine theme included
+- Matching themes for Terminal.app, Ghostty, Rex, WezTerm and zsh, in [terminal themes](#terminal-themes)
 - Optional transparent background
 - Safe to reapply when switching colorschemes or reloading configuration
 
@@ -139,6 +140,14 @@ Hex colors need a true-color terminal. Otherwise zsh falls back to the nearest 2
 
 Copy `extras/wezterm/cutiepro.lua` next to your `wezterm.lua` and set `config.colors = require('cutiepro')`.
 
+### Ghostty
+
+Copy `extras/ghostty/cutiepro` to `~/.config/ghostty/themes/cutiepro`, then set `theme = cutiepro` in your Ghostty config.
+
+### Rex
+
+[Rex](https://www.superlogical.com/updates/public-testing-beginning) can import the Ghostty theme. `extras/rex/cutiepro` is a copy of it, so import that file in Rex to use CutiePro.
+
 ## Troubleshooting
 
 ### Colors look washed out or incorrect
@@ -196,6 +205,8 @@ lua/cutiepro/plugins.lua        # loads the plugin integrations
 lua/cutiepro/plugins/           # one module per plugin
 lua/lualine/themes/cutiepro.lua # Lualine theme
 extras/wezterm/                 # WezTerm color scheme
+extras/ghostty/                 # Ghostty theme
+extras/rex/                     # Rex theme, a copy of the Ghostty one
 extras/terminal/                # macOS Terminal.app profile
 extras/zsh/                     # zsh command-line highlighting (standalone and zsh-syntax-highlighting)
 scripts/                        # generator for the extras and the palette tables
