@@ -50,7 +50,7 @@ function M.load()
 
 	local palette = require('cutiepro.palette')
 	apply_highlight_groups(collect_highlight_groups(palette))
-	set_terminal_colors(palette.ansi)
+	set_terminal_colors(palette.terminal_colors)
 end
 
 return M
