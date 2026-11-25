@@ -19,6 +19,7 @@ Warm pinks, muted olive greens, lilac functions, and soft neutral backgrounds, b
 - Telescope integration
 - nvim-cmp completion highlighting
 - Gitsigns support
+- nvim-treesitter-context, nvim-dap, neotest, mason, kulala and vim-dadbod-ui highlights
 - Indent guides and editor UI highlights
 - Lualine theme included
 - Optional transparent background
@@ -112,12 +113,14 @@ require("lualine").setup({
 
 ## Terminal themes
 
+The files in `extras` are generated from `lua/cutiepro/palette.lua`, so edit the palette and never the generated files. See [Contributing](#contributing).
+
 ### macOS Terminal.app
 
 A ready-made profile lives at `extras/terminal/CutiePro.terminal`. Double-click it to import it into Terminal → Settings → Profiles. Regenerate it after palette changes with:
 
 ```sh
-swift extras/terminal/generate.swift extras/terminal/CutiePro.terminal
+nvim -l scripts/build-extras.lua
 ```
 
 Terminal.app only supports 24-bit color on recent macOS releases. On older versions, only the 16 ANSI colors in the profile are exact.
@@ -178,22 +181,24 @@ Run the smoke tests:
 nvim --headless -u test/minimal_init.lua +"luafile test/smoke.lua"
 ```
 
-The test suite verifies palette values, attribute integrity, repeated and transparent application, switching colorschemes, the plugin highlight groups, and the Lualine theme. It runs headless with no plugins installed, so it confirms that the theme defines the right highlight groups rather than exercising each plugin itself.
+The test suite verifies palette values and names, attribute integrity, repeated and transparent application, switching colorschemes, the plugin highlight groups, and the Lualine theme. It runs headless with no plugins installed, so it confirms that the theme defines the right highlight groups rather than exercising each plugin itself.
 
 ## Project structure
 
 ```
-assets/                         # README preview image
+assets/                         # README preview image and palette swatches
 colors/cutiepro.lua             # :colorscheme entrypoint
 lua/cutiepro/init.lua           # setup and highlight application
 lua/cutiepro/palette.lua        # color definitions
 lua/cutiepro/highlights.lua     # editor UI, LSP, diagnostics, diff
 lua/cutiepro/syntax.lua         # syntax, Treesitter, markup
-lua/cutiepro/plugins.lua        # plugin integrations
+lua/cutiepro/plugins.lua        # loads the plugin integrations
+lua/cutiepro/plugins/           # one module per plugin
 lua/lualine/themes/cutiepro.lua # Lualine theme
 extras/wezterm/                 # WezTerm color scheme
-extras/terminal/                # macOS Terminal.app profile and generator
+extras/terminal/                # macOS Terminal.app profile
 extras/zsh/                     # zsh command-line highlighting (standalone and zsh-syntax-highlighting)
+scripts/                        # generator for the extras and the palette tables
 test/                           # development configuration and tests
 ```
 
@@ -257,6 +262,16 @@ generated from `lua/cutiepro/palette.lua` by `scripts/build-extras.lua`.
 | lemon  | ![lemon](assets/swatches/ffef43.svg)  | `#ffef43` | Matching brackets                           |
 
 <!-- palette:end -->
+
+## Contributing
+
+The extras and the palette tables above are generated from `lua/cutiepro/palette.lua`, so edit the palette and never the generated files. Then run this with Neovim 0.10 or newer:
+
+```sh
+nvim -l scripts/build-extras.lua
+```
+
+Add `--check` to list any generated file that is out of date without writing.
 
 ## Credits
 
