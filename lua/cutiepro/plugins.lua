@@ -4,16 +4,12 @@
 -- installed
 local M = {}
 
-local plugin_modules = { 'gitsigns', 'cmp', 'telescope' }
-
--- indent-blankline, until it gets its own module
-local function remaining_groups(palette)
-	return {
-		-- indent-blankline
-		{ 'IblIndent', { fg = palette.border } },
-		{ 'IblScope', { fg = palette.foreground_muted } },
-	}
-end
+local plugin_modules = {
+	'gitsigns',
+	'cmp',
+	'telescope',
+	'indent-blankline',
+}
 
 function M.get(palette, options)
 	local groups = {}
@@ -21,7 +17,6 @@ function M.get(palette, options)
 		local module = require('cutiepro.plugins.' .. module_name)
 		vim.list_extend(groups, module.get(palette, options))
 	end
-	vim.list_extend(groups, remaining_groups(palette))
 	return groups
 end
 
