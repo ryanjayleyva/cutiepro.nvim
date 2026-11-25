@@ -125,16 +125,4 @@ M.terminal_colors = {
 	M.foreground_bright,
 }
 
--- Old names, removed once every module uses the names above
-M.bg = M.background
-M.bg_alt = M.background_panel
-M.bg_gutter = M.background_gutter
-M.bg_cursorline = M.background_cursorline
-M.bg_highlight = M.background_selection
-M.bg_popup = M.background_popup
-M.fg = M.foreground
-M.fg_bright = M.foreground_bright
-M.fg_dim = M.foreground_muted
-M.ansi = M.terminal_colors
-
 return M
