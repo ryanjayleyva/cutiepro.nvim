@@ -13,6 +13,7 @@ local plugin_modules = {
 	'dap',
 	'neotest',
 	'mason',
+	'kulala',
 }
 
 function M.get(palette, options)
