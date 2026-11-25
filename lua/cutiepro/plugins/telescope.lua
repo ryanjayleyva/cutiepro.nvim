@@ -16,7 +16,7 @@ function M.get(palette, options)
 		{ 'TelescopeResultsTitle', { fg = palette.foreground_muted } },
 		-- NonText is too dark to read for the counter
 		{ 'TelescopePromptCounter', { fg = palette.foreground_muted } },
-		{ 'TelescopePreviewTitle', { fg = palette.green } },
+		{ 'TelescopePreviewTitle', { fg = palette.sour_apple } },
 		{
 			'TelescopeSelection',
 			{ fg = palette.accent, bg = palette.background_selection, bold = true },

@@ -10,10 +10,10 @@ local terminal_setup = [==[
 [[ $COLORTERM == (truecolor|24bit) ]] || zmodload zsh/nearcolor 2>/dev/null
 
 # macOS ls colors. BSD ls only supports the 16 ANSI colors, which the CutiePro
-# Terminal profile maps to the palette: pink (magenta) dirs, teal executables,
-# cyan-green links, yellow pipes and devices. Regular files keep the default
+# Terminal profile maps to the palette: magenta dirs, blue executables,
+# cyan links, sand pipes and devices. Regular files keep the default
 # text color. Pairs are foreground+background (x = default); uppercase is bold.
-# Letters: a black, b red, c green, d yellow, e blue (teal), f magenta, g cyan.
+# Letters: a black, b strawberry, c sour_apple, d sand, e blue, f magenta, g cyan.
 export CLICOLOR=1
 export LSCOLORS=FxgxcxdxexdxdxbxbxFxFx
 ]==]
@@ -94,14 +94,14 @@ add-zle-hook-widget zle-line-pre-redraw _cutiepro_highlight
 -- Colors for the tokenizer in cutiepro.zsh, with the Treesitter capture that
 -- each one follows
 local highlight_colors = {
-	{ 'command', palette.lilac, '@function.call' },
-	{ 'builtin', palette.lilac, '@function.builtin', italic = true },
-	{ 'keyword', palette.red, '@keyword' },
-	{ 'error', palette.red, 'Error (unknown command)' },
-	{ 'string', palette.green, '@string' },
+	{ 'command', palette.bright_magenta, '@function.call' },
+	{ 'builtin', palette.bright_magenta, '@function.builtin', italic = true },
+	{ 'keyword', palette.strawberry, '@keyword' },
+	{ 'error', palette.strawberry, 'Error (unknown command)' },
+	{ 'string', palette.sour_apple, '@string' },
 	{ 'argument', palette.accent, '@variable.parameter / @variable' },
-	{ 'number', palette.sky, '@number' },
-	{ 'operator', palette.cream, '@operator, @punctuation' },
+	{ 'number', palette.bright_blue, '@number' },
+	{ 'operator', palette.honeycomb, '@operator, @punctuation' },
 	{ 'comment', palette.foreground_muted, '@comment' },
 }
 
@@ -151,12 +151,12 @@ end
 local syntax_sections = {
 	{
 		{ 'foreground', 'default' },
-		{ 'red', 'unknown-token', 'reserved-word', 'bracket-error' },
+		{ 'strawberry', 'unknown-token', 'reserved-word', 'bracket-error' },
 		{ 'foreground_muted', 'comment' },
 	},
 	{
 		{
-			'lilac',
+			'bright_magenta',
 			'precommand',
 			'command',
 			'alias',
@@ -166,11 +166,11 @@ local syntax_sections = {
 			'hashed-command',
 			'arg0',
 		},
-		{ 'lilac', 'builtin', italic = true },
+		{ 'bright_magenta', 'builtin', italic = true },
 	},
 	{
 		{
-			'cream',
+			'honeycomb',
 			'commandseparator',
 			'redirection',
 			'globbing',
@@ -195,7 +195,7 @@ local syntax_sections = {
 	},
 	{
 		{
-			'green',
+			'sour_apple',
 			'single-quoted-argument',
 			'double-quoted-argument',
 			'dollar-quoted-argument',
@@ -203,7 +203,7 @@ local syntax_sections = {
 	},
 	{
 		{
-			'sky',
+			'bright_blue',
 			'rc-quote',
 			'dollar-double-quoted-argument',
 			'back-double-quoted-argument',

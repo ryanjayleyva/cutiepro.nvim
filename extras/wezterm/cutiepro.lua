@@ -5,11 +5,11 @@
 local M = {}
 
 M.foreground = '#d5d0c9'
-M.background = '#181716'
+M.background = '#181818'
 M.cursor_bg = '#e5a1a3'
-M.cursor_fg = '#181716'
+M.cursor_fg = '#181818'
 M.cursor_border = '#e5a1a3'
-M.compose_cursor = '#caa2ca'
+M.compose_cursor = '#c3a6cb'
 M.selection_fg = '#d5d0c9'
 M.selection_bg = '#383838'
 M.scrollbar_thumb = '#383838'
@@ -39,11 +39,11 @@ M.brights = {
 -- The tab bar follows the Neovim statusline, with an accent bar for the active tab
 M.tab_bar = {
 	background = '#181818',
-	active_tab = { bg_color = '#e5a1a3', fg_color = '#181716' },
+	active_tab = { bg_color = '#e5a1a3', fg_color = '#181818' },
 	inactive_tab = { bg_color = '#181818', fg_color = '#88847f' },
-	inactive_tab_hover = { bg_color = '#242628', fg_color = '#d5d0c9' },
+	inactive_tab_hover = { bg_color = '#2e2a27', fg_color = '#d5d0c9' },
 	new_tab = { bg_color = '#181818', fg_color = '#88847f' },
-	new_tab_hover = { bg_color = '#242628', fg_color = '#d5d0c9' },
+	new_tab_hover = { bg_color = '#2e2a27', fg_color = '#d5d0c9' },
 }
 
 return M

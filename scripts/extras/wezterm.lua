@@ -7,7 +7,7 @@ local theme = shared.theme
 local ansi_colors = { unpack(shared.terminal_colors, 1, 8) }
 local bright_colors = { unpack(shared.terminal_colors, 9, 16) }
 
-local tab_bar_background = palette.background_panel
+local tab_bar_background = palette.background
 
 -- Tab bar states, in the order they are written
 local tab_styles = {
@@ -18,22 +18,22 @@ local tab_styles = {
 	},
 	{
 		name = 'inactive_tab',
-		background = palette.background_panel,
+		background = palette.background,
 		foreground = palette.foreground_muted,
 	},
 	{
 		name = 'inactive_tab_hover',
-		background = palette.background_cursorline,
+		background = palette.border,
 		foreground = palette.foreground,
 	},
 	{
 		name = 'new_tab',
-		background = palette.background_panel,
+		background = palette.background,
 		foreground = palette.foreground_muted,
 	},
 	{
 		name = 'new_tab_hover',
-		background = palette.background_cursorline,
+		background = palette.border,
 		foreground = palette.foreground,
 	},
 }
@@ -52,7 +52,7 @@ local function build_lua_module()
 		("M.cursor_fg = '%s'"):format(theme.background),
 		("M.cursor_border = '%s'"):format(theme.cursor),
 		-- Lilac stays distinct from the cursor while composing characters
-		("M.compose_cursor = '%s'"):format(palette.lilac),
+		("M.compose_cursor = '%s'"):format(palette.bright_magenta),
 		("M.selection_fg = '%s'"):format(theme.selection_foreground),
 		("M.selection_bg = '%s'"):format(theme.selection_background),
 		("M.scrollbar_thumb = '%s'"):format(theme.selection_background),

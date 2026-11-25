@@ -3,9 +3,9 @@ local M = {}
 
 function M.get(palette)
 	return {
-		{ 'GitSignsAdd', { fg = palette.green } },
+		{ 'GitSignsAdd', { fg = palette.sour_apple } },
 		{ 'GitSignsChange', { fg = palette.accent } },
-		{ 'GitSignsDelete', { fg = palette.red } },
+		{ 'GitSignsDelete', { fg = palette.strawberry } },
 	}
 end
 
