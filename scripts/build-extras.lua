@@ -16,6 +16,7 @@ local shared = require('extras.shared')
 
 local targets = {
 	'extras.wezterm',
+	'extras.ghostty',
 	'extras.zsh',
 	'extras.terminal',
 	'extras.readme',
