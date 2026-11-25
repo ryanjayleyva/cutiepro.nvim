@@ -9,6 +9,7 @@ local plugin_modules = {
 	'cmp',
 	'telescope',
 	'indent-blankline',
+	'treesitter-context',
 }
 
 function M.get(palette, options)
