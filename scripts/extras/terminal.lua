@@ -40,6 +40,22 @@ local generic_rgb_gamma = 1.8
 local srgb_profile =
 	assert(shared.read_file(shared.repo_root .. '/scripts/extras/srgb.icc'))
 
+-- An ICC profile starts with its own length, so a profile that something has
+-- added to or cut short is caught here and does not end up in every color
+local length_bytes = { srgb_profile:byte(1, 4) }
+local declared_length = (
+	(length_bytes[1] * 256 + length_bytes[2]) * 256 + length_bytes[3]
+)
+		* 256
+	+ length_bytes[4]
+assert(
+	declared_length == #srgb_profile,
+	('srgb.icc is %d bytes but its header says %d'):format(
+		#srgb_profile,
+		declared_length
+	)
+)
+
 -- '#e5a1a3' to the three sRGB channels, each from 0 to 1
 local function srgb_channels(hex)
 	local channels = {}
