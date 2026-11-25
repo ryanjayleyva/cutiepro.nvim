@@ -52,12 +52,22 @@ local ok, err = pcall(function()
 
 	-- 2c. Every group the theme defines keeps at least one attribute,
 	-- which catches references to missing or misspelled palette keys.
-	local p = require('cutiepro.palette')
-	for _, mod in ipairs({ 'highlights', 'syntax', 'plugins' }) do
-		local groups = require('cutiepro.' .. mod).get(p, { transparent = false })
-		for _, hl in ipairs(groups) do
-			eq(next(hl[2]) ~= nil, true, hl[1] .. ' has attributes')
+	local palette = require('cutiepro.palette')
+	for _, module_name in ipairs({ 'highlights', 'syntax', 'plugins' }) do
+		local module = require('cutiepro.' .. module_name)
+		for _, group in ipairs(module.get(palette, { transparent = false })) do
+			eq(next(group[2]) ~= nil, true, group[1] .. ' has attributes')
 		end
+	end
+
+	-- 2d. Every terminal color has a name, which the generators rely on
+	eq(#palette.terminal_colors, 16, 'terminal color count')
+	for index, color in ipairs(palette.terminal_colors) do
+		eq(
+			palette.color_names[color] ~= nil,
+			true,
+			('terminal color %d has a name'):format(index - 1)
+		)
 	end
 
 	-- 3. Re-applying the colorscheme is idempotent
@@ -76,6 +86,12 @@ local ok, err = pcall(function()
 		'GitSignsAdd',
 		'CmpItemKind',
 		'IblIndent',
+		'TreesitterContext',
+		'DapBreakpoint',
+		'NeotestPassed',
+		'MasonHeader',
+		'KulalaOpenAPIMethodGet',
+		'dbui_connection_ok',
 	}) do
 		eq(
 			vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = g })),
@@ -87,6 +103,8 @@ local ok, err = pcall(function()
 	-- 5. Lualine theme loads independently of Lualine
 	local lualine = require('lualine.themes.cutiepro')
 	eq(lualine.normal.a.bg, '#e5a1a3', 'lualine normal.a.bg')
+	eq(lualine.visual.a.bg, '#80c5de', 'lualine visual.a.bg (ANSI 12)')
+	eq(lualine.command.a.bg, '#f3b061', 'lualine command.a.bg (ANSI 11)')
 
 	-- 6. Switching away and back works
 	vim.cmd.colorscheme('default')
@@ -97,9 +115,24 @@ local ok, err = pcall(function()
 	require('cutiepro').setup({ transparent = true })
 	eq(bg('Normal'), 'NONE', 'transparent Normal bg')
 	eq(bg('NormalFloat'), 'NONE', 'transparent NormalFloat bg')
+	-- The sticky context stays opaque so scrolling code does not show through
+	eq(bg('TreesitterContext'), '#181716', 'transparent TreesitterContext bg')
 	require('cutiepro').setup({ transparent = false })
 	eq(bg('Normal'), '#181716', 'reverted Normal bg')
 	eq(bg('NormalFloat'), '#1f1e1b', 'reverted NormalFloat bg')
+
+	-- 8. vim-dadbod-ui sets its status colors when its buffer opens, so the
+	-- theme applies them again afterward
+	vim.api.nvim_set_hl(0, 'dbui_connection_ok', { fg = '#00ff00' })
+	vim.bo.filetype = 'dbui'
+	vim.wait(200, function()
+		return fg('dbui_connection_ok') == '#bec975'
+	end)
+	eq(
+		fg('dbui_connection_ok'),
+		'#bec975',
+		'dbui_connection_ok after dbui buffer'
+	)
 end)
 
 if ok then
