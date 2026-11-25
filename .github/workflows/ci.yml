@@ -20,6 +20,8 @@ jobs:
           version: ${{ matrix.neovim }}
       - name: Run smoke test
         run: nvim --headless -u test/minimal_init.lua +"luafile test/smoke.lua"
+      - name: Check generated files
+        run: nvim -l scripts/build-extras.lua --check
   stylua:
     runs-on: ubuntu-latest
     steps:
